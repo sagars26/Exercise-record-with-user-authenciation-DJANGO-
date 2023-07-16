@@ -11,3 +11,15 @@ class Customer(models.Model):
     
     def __str__(self):
         return str(self.name)
+    
+class Category(models.Model):
+    options=(
+        ('chest','chest'),
+        ('back','back'),
+        ('arms','arms'),
+        ('legs','legs'),
+        ('core','core')
+    )
+    name=models.CharField(max_length=50,choices=options)
+    def __str__(self):
+        return self.name
