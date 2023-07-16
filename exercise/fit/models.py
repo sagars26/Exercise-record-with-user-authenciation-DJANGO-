@@ -24,7 +24,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
     
-class Exedone(models.Model):
+class Exerc(models.Model):
     name = models.CharField(max_length=200)
     category = models.ManyToManyField(Category)
     rep = models.IntegerField(default=1,null=True,blank=True)
@@ -35,3 +35,8 @@ class Exedone(models.Model):
     
     def __str__(self):
         return str(self.name)
+    
+    #for user page-------------------------------------------------------------
+class UserFooditem(models.Model):
+    customer = models.ManyToManyField(Customer ,blank=True)
+    exerdone=models.ManyToManyField(Exerc)
