@@ -23,3 +23,15 @@ class Category(models.Model):
     name=models.CharField(max_length=50,choices=options)
     def __str__(self):
         return self.name
+    
+class Exedone(models.Model):
+    name = models.CharField(max_length=200)
+    category = models.ManyToManyField(Category)
+    rep = models.IntegerField(default=1,null=True,blank=True)
+    set = models.IntegerField(default=1,null=True,blank=True)
+    weight = models.IntegerField(default=1,null=True,blank=True)
+    calorie=models.DecimalField(max_digits=5,decimal_places=2,default=0,blank=True)
+    
+    
+    def __str__(self):
+        return str(self.name)
