@@ -37,6 +37,6 @@ class Exerc(models.Model):
         return str(self.name)
     
     #for user page-------------------------------------------------------------
-class UserFooditem(models.Model):
+class Userexer(models.Model):
     customer = models.ManyToManyField(Customer ,blank=True)
     exerdone=models.ManyToManyField(Exerc)
