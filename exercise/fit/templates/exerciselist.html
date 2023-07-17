@@ -1,0 +1,142 @@
+{% extends 'main.html' %}
+{% load static%}
+
+{% block content %}
+    <div class="flex-box-row">
+        <br>
+        <br>
+        <h5 id="heading">chest</h5>
+        <h7>Total options:{{cht}}</h7>
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createxercise' %}">Add exercise</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Weight</th>
+                    <th>Calorie</th>
+                    
+                </tr>
+               {% for chest exercise  %}
+                <tr>
+                    <td>{{items.name}} </td>
+                    <td>{{items.Reps}} </td>
+                    <td>{{items.Sets}} </td>
+                    <td>{{items.Weight}} </td>
+                    <td>{{items.calorie}} </td>
+                    </tr>
+                    
+                {% endfor %}
+            </table>
+    </div>
+    <br>
+<!---------------------------->
+    <div class="flex-box-row">
+        <h5 id="heading">Back</h5>
+        <h7>Total options:{{bck}}</h7>
+        
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createxercise %}">Add more options</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Weight</th>
+                    <th>Calorie</th>
+                    
+                </tr>
+               {% for items in Back %}
+                <tr>
+                    <td>{{items.name}} </td>
+                    <td>{{items.Reps}} </td>
+                    <td>{{items.Sets}} </td>
+                    <td>{{items.Weight}} </td>
+                    <td>{{items.calorie}} </td>
+                    </tr>
+                    
+                {% endfor %}
+            </table>
+       
+    </div>
+    <br>
+<!------------------------------------------->
+    <div class="flex-box-row">
+        <h5 id="heading">legs</h5>
+        <h7>Total options:{{lgs}}</h7>
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createxercise' %}">Add more options</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Weight</th>
+                    <th>Calorie</th>
+                    
+                </tr>
+               {% for items in Back %}
+                <tr>
+                    <td>{{items.name}} </td>
+                    <td>{{items.Reps}} </td>
+                    <td>{{items.Sets}} </td>
+                    <td>{{items.Weight}} </td>
+                    <td>{{items.calorie}} </td>
+                    </tr>
+                    
+                {% endfor %}
+            </table>
+    </div>
+    <br>
+<!-------------------------------------->
+    <div class="flex-box-row">
+        <h5 id="heading">arms</h5>
+        <h7>Total options:{{ars}}</h7>
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createxercise' %}">Add more options</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Weight</th>
+                    <th>Calorie</th>
+                </tr>
+               {% for items in arms %}
+                <tr>
+                    <td>{{items.name}} </td>
+                    <td>{{items.Reps}} </td>
+                    <td>{{items.Sets}} </td>
+                    <td>{{items.Weight}} </td>
+                    <td>{{items.calorie}} </td>
+                    </tr>
+                    
+                {% endfor %}
+            </table>
+    </div>
+    <br>
+-------------------------------------
+    <div class="flex-box-row">
+        <h5 id="heading">core</h5>
+        <h7>Total options:{{cre}}</h7>
+            <a class="btn btn-primary  btn-sm btn-block" href="{% url 'createxercise' %}">Add more options</a>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Reps</th>
+                    <th>Sets</th>
+                    <th>Weight</th>
+                    <th>Calorie</th>
+                </tr>
+               {% for items in core %}
+                <tr>
+                    <td>{{items.name}} </td>
+                    <td>{{items.Reps}} </td>
+                    <td>{{items.Sets}} </td>
+                    <td>{{items.Weight}} </td>
+                    <td>{{items.calorie}} </td>
+                    </tr>
+                    
+                {% endfor %}
+            </table>
+    </div>
+    <br>
+</div>
+{% endblock %}
