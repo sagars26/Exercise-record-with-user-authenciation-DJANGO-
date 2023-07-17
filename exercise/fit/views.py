@@ -129,3 +129,15 @@ def userPage(request):
     CalorieLeft=2000-totalCalories
     context={'CalorieLeft':CalorieLeft,'totalCalories':totalCalories,'cnt':cnt,'foodlist':finalexer,'fooditem':exerciselist,'myfilter':myfilter}
     return render(request,'user.html',context)
+
+def addexercise(request):
+    user=request.user
+    cust=user.customer
+    if request.method=="POST":
+        form =addUserexitem(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    form=addUserexitem()
+    context={'form':form}
+    return render(request,'addUserexitem.html',context)
