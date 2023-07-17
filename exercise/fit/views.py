@@ -30,3 +30,31 @@ def home(request):
               'customers':customers,
             }
     return render(request,'main.html',context)
+
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def exerciselist(request):
+    chest=Category.objects.filter(name='chest')[0].exerciselist_set.all()
+    cht=chest.count()
+    back=Category.objects.filter(name='back')[0].exerciselist_set.all()
+    bck=back.count()
+    legs=Category.objects.filter(name='legs')[0].exerciselist_set.all()
+    lgs=legs.count()
+    arms=Category.objects.filter(name='arms')[0].exerciselist_set.all()
+    ars=arms.count()
+    core=Category.objects.filter(name='arms')[0].exerciselist_set.all()
+    cre=core.count()
+    context={'chest':chest,
+              'cht':bcnt,
+              'bck':bck,
+              'lgs':lgs,
+              'ars':ars,
+              'cre':cre
+              'back':back,
+              'legs':legs,
+              'arms':arms,
+              'core':core,
+            }
+    return render(request,'exeriselist.html',context)
+
