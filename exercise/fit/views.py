@@ -2,13 +2,14 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from .models import *
-from .forms import *
+from .form import *
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from .decorators import *
 from django.contrib.auth.models import Group
 from .filters import exerciseFilter
+from .form import exerciseForm
 
 
 
@@ -46,15 +47,28 @@ def exerciselist(request):
     core=Category.objects.filter(name='arms')[0].exerciselist_set.all()
     cre=core.count()
     context={'chest':chest,
-              'cht':bcnt,
+              'cht':cht,
               'bck':bck,
               'lgs':lgs,
               'ars':ars,
-              'cre':cre
+              'cre':cre,
               'back':back,
               'legs':legs,
               'arms':arms,
               'core':core,
             }
     return render(request,'exeriselist.html',context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admin'])
+def createxercise(request):
+    form = exerciseForm()
+    if request.method == 'POST':
+        form = exerciseForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context={'form':form}
+    return render(request,'createxercise.html',context)
+
 
