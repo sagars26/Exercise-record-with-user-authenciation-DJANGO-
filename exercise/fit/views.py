@@ -71,4 +71,61 @@ def createxercise(request):
     context={'form':form}
     return render(request,'createxercise.html',context)
 
+@unauthorized_user
+def registerPage(request):
+    form=createUserForm()
+    if request.method=='POST':
+        form=createUserForm(request.POST)
+        if form.is_valid():
+            user=form.save()
+            username=form.cleaned_data.get('username')
+            group=Group.objects.get(name='user')
+            user.groups.add(group)
+            email=form.cleaned_data.get('email')
+            Customer.objects.create(user=user, name=username,email=email)
+            messages.success(request,'Account created for '+username)
+            return redirect('login')
+    context={'form':form}
+    return render(request,'register.html',context)
 
+@unauthorized_user
+def loginPage(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.info(request,'username or password is invalid')
+    return render(request,'login.html')
+
+
+@login_required(login_url='login')
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
+
+def userPage(request):
+    user=request.user
+    cust=user.customer
+    exerciselist=Exerc.objects.filter()
+    myfilter = exerciseFilter(request.GET,queryset=exerciselist)
+    exerciselist=myfilter.qs
+    total=Userexer.objects.all()
+    myexercise=total.filter(customer=cust)
+    cnt=myexercise.count()
+    querysetexer=[]
+    for e in myexercise:
+        querysetexer.append(e.exerdone.all())
+    finalexer=[]
+    for items in querysetexer:
+        for ex_er in items:
+            finalexer.append(ex_er)
+    totalCalories=0
+    for exerci in finalexer:
+        totalCalories+=exerci.calorie
+    CalorieLeft=2000-totalCalories
+    context={'CalorieLeft':CalorieLeft,'totalCalories':totalCalories,'cnt':cnt,'foodlist':finalexer,'fooditem':exerciselist,'myfilter':myfilter}
+    return render(request,'user.html',context)
